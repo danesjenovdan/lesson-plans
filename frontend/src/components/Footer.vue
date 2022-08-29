@@ -28,6 +28,10 @@
 footer {
   padding-inline: 60px;
 
+  @media (max-width: 991.98px) {
+    padding-inline: 20px;
+  }
+
   .links {
     display: flex;
     gap: 100px;
@@ -36,6 +40,10 @@ footer {
     font-size: 16px;
     font-weight: 600;
     color: #252525;
+
+    @media (max-width: 575.98px) {
+      justify-content: space-evenly;
+    }
 
     a,
     a:visited {
@@ -54,10 +62,21 @@ footer {
     justify-content: space-between;
     padding: 16px 20px;
 
+    @media (max-width: 575.98px) {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
     .left-side,
     .right-side {
       display: flex;
+      flex-wrap: wrap;
       gap: 40px;
+
+      @media (max-width: 575.98px) {
+        gap: 20px;
+      }
     }
 
     img {

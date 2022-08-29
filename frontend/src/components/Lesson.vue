@@ -95,6 +95,10 @@ export default {
   margin: 10px 0 0 0;
   padding: 0;
 
+  @media (max-width: 991.98px) {
+    margin-top: 0;
+  }
+
   .tag {
     display: inline-block;
     background-color: #c1ead7;
@@ -108,6 +112,10 @@ export default {
       color: #252525;
       font-family: "Inter", sans-serif;
       font-size: 18px;
+
+      @media (max-width: 991.98px) {
+        font-size: 12px;
+      }
     }
   }
 }
@@ -127,6 +135,12 @@ export default {
     color: #252525;
     cursor: pointer;
     transform-style: preserve-3d;
+
+    @media (max-width: 575.98px) {
+      font-size: 14px;
+      padding: 12px 20px;
+      gap: 18px;
+    }
 
     &::before {
       content: "";
@@ -152,6 +166,10 @@ export default {
       padding: 18px;
       width: fit-content;
 
+      @media (max-width: 575.98px) {
+        padding: 12px;
+      }
+
       & + .info {
         margin-top: -1px;
       }
@@ -162,6 +180,10 @@ export default {
         font-size: 14px;
         font-style: italic;
         margin-right: 18px;
+
+        @media (max-width: 575.98px) {
+          font-size: 12px;
+        }
       }
 
       .value {
@@ -169,6 +191,10 @@ export default {
         font-family: "Inter", sans-serif;
         font-size: 18px;
         font-weight: 600;
+
+        @media (max-width: 575.98px) {
+          font-size: 14px;
+        }
       }
 
       &.similar-lessons {
@@ -193,6 +219,10 @@ export default {
                 text-decoration: none;
                 color: #252525;
                 border-bottom: 1px solid #000;
+
+                @media (max-width: 575.98px) {
+                  font-size: 12px;
+                }
               }
 
               &::before {

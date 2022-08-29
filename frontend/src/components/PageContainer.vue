@@ -19,10 +19,18 @@
     padding-inline: 60px;
     background-color: #f1f2f2;
 
+    @media (max-width: 991.98px) {
+      padding-inline: 20px;
+    }
+
     .wrapper {
       max-width: 1370px;
       margin-inline: auto;
       margin-top: 50px;
+
+      @media (max-width: 991.98px) {
+        margin-top: 20px;
+      }
 
       .back-link {
         font-family: "Inter", sans-serif;

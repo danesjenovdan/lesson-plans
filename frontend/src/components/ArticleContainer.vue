@@ -18,6 +18,11 @@
   margin-top: 50px;
   margin-bottom: 40px;
 
+  @media (max-width: 991.98px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .main-content {
     flex: 2;
 
@@ -27,6 +32,10 @@
       font-family: "Fredoka", sans-serif;
       font-weight: 600;
       font-size: 46px;
+
+      @media (max-width: 575.98px) {
+        font-size: 32px;
+      }
     }
 
     .main-text {
@@ -35,6 +44,12 @@
       font-family: "Inter", sans-serif;
       font-size: 21px;
       line-height: 31px;
+
+      @media (max-width: 575.98px) {
+        margin-top: 28px;
+        font-size: 16px;
+         line-height: 24px;
+      }
     }
   }
 
