@@ -153,8 +153,6 @@ export default {
     },
     tags: function () {
       let tags = []
-      console.log("store")
-        console.log(this.$store)
       Object.keys(this.$store.getters.getFilters).forEach(filter => {
         this.$store.getters.getFilters[filter].forEach((filterValue) => {
           // TODO: uredi translations (dobit <ime filtra> iz nekje)

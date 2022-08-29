@@ -23,7 +23,7 @@
         <div class="content-no-filters" @click="toggleSelected" v-if="chosenLanguageFilters.length === 0">
           <img src="../assets/language.svg" />
           <span data-type="languageFilter">
-            <i>{{ $t('filters.language') }}</i>
+            {{ $t('filters.language') }}
           </span>
         </div>
         <div class="popup-container" id="languageFilter" @click.stop>
@@ -64,7 +64,7 @@
         <div class="content-no-filters" @click="toggleSelected" v-if="chosenAgeAndDifficultyFilters.length === 0">
           <img src="../assets/difficulty.svg" />
           <span data-type="ageAndDifficultyFilter">
-            <i>{{ $t('filters.ageAndDifficulty') }}</i>
+            {{ $t('filters.ageAndDifficulty') }}
           </span>
         </div>
         <div class="popup-container" id="ageAndDifficultyFilter" @click.stop>
@@ -104,7 +104,7 @@
         <div class="content-no-filters" @click="toggleSelected" v-if="chosenTopicFilters.length === 0">
           <img src="../assets/topic.svg" />
           <span data-type="topicFilter">
-            <i>{{ $t('filters.topic') }}</i>
+            {{ $t('filters.topic') }}
           </span>
         </div>
         <div class="popup-container" id="topicFilter" @click.stop>
@@ -145,7 +145,7 @@
         <div class="content-no-filters" @click="toggleSelected" v-if="chosenActivityTypeFilters.length === 0">
           <img src="../assets/activity_type.svg" />
           <span data-type="activityTypeFilter">
-            <i>{{ $t('filters.activityType') }}</i>
+            {{ $t('filters.activityType') }}
           </span>
         </div>
         <div class="popup-container" id="activityTypeFilter" @click.stop>
@@ -186,7 +186,7 @@
         <div class="content-no-filters" @click="toggleSelected" v-if="chosenDurationFilters.length === 0">
           <img src="../assets/duration.svg" />
           <span data-type="durationFilter">
-            <i>{{ $t('filters.duration') }}</i>
+            {{ $t('filters.duration') }}
           </span>
         </div>
         <div class="popup-container" id="durationFilter" @click.stop>
@@ -227,10 +227,10 @@
         <div class="content-no-filters" @click="toggleSelected" v-if="chosenMaterialTypeFilters.length === 0">
           <img src="../assets/type.svg" />
           <span data-type="materialTypeFilter">
-            <i>{{ $t('filters.materialType') }}</i>
+            {{ $t('filters.materialType') }}
           </span>
         </div>
-        <div class="popup-container" id="materialTypePrepFilter" @click.stop>
+        <div class="popup-container" id="materialTypeFilter" @click.stop>
           <div class="popup-box">
             <div class="checkmark-container">
               <div v-for="materialType in materialTypeArray" :key="materialType">
