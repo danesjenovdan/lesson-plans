@@ -15,7 +15,7 @@
     </template>
     <template #sidebar>
       <div class="sidebar-content">
-        <button class="download" @click="popupVisible = true">
+        <button class="download" @click="modalVisible = true">
           Download lesson
           <img src="../assets/download.svg" />
         </button>
@@ -64,26 +64,26 @@
       </div>
     </template>
   </ArticleContainer>
-  <DownloadPopup
-    v-if="popupVisible"
-    @success="popupVisible = false"
+  <DownloadModal
+    v-if="modalVisible"
+    @success="modalVisible = false"
     :lesson="lesson"
   />
 </template>
 
 <script>
 import ArticleContainer from "../components/ArticleContainer.vue";
-import DownloadPopup from "./Download.vue";
+import DownloadModal from "./DownloadModal.vue";
 
 export default {
   components: {
     ArticleContainer,
-    DownloadPopup,
+    DownloadModal,
   },
   props: ["id", "lesson"],
   data() {
     return {
-      popupVisible: false,
+      modalVisible: false,
     };
   },
 };
