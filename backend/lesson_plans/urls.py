@@ -22,7 +22,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r"^admin/", admin.site.urls),
-    url(r"^api/v1/lessons/", include("lessons.urls"), name="lessons"),
+    url(r"^api/v1/", include("lessons.urls"), name="lessons"),
 ]
 
 # dodamo tole:

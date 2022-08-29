@@ -1,12 +1,12 @@
-from django.conf.urls import url
 from rest_framework.routers import DefaultRouter
 
-from lessons.views import LessonViewSet
+from lessons.views import LessonViewSet, DownloadViewSet
 
 app_name = "lessons"
 
 router = DefaultRouter()
-router.register(r"", LessonViewSet)
+router.register(r"lessons", LessonViewSet)
+router.register(r"download", DownloadViewSet)
 
 urlpatterns = []
 

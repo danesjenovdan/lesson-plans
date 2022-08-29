@@ -10,7 +10,7 @@
       <div class="lesson-text">{{ lesson.description }}</div>
     </div>
     <div class="sidebar">
-      <button class="download">
+      <button class="download" @click="popupVisible = true">
         Download lesson
         <img src="../assets/download.svg" />
       </button>
@@ -21,23 +21,19 @@
             class="value"
             v-for="materialType in lesson.material_type"
             :key="materialType"
-            >{{ materialType }}</span
-          >
+          >{{ materialType }}</span>
         </div>
         <div class="info">
           <span class="meta">Language</span>
-          <span
-            class="value"
-            v-for="language in lesson.language"
-            :key="language"
-            >{{ language }}</span
-          >
+          <span class="value" v-for="language in lesson.language" :key="language">{{ language }}</span>
         </div>
         <div class="info">
           <span class="meta">Topic</span>
-          <span class="value" v-for="topic in lesson.topic" :key="topic">{{
-            topic
-          }}</span>
+          <span class="value" v-for="topic in lesson.topic" :key="topic">
+            {{
+              topic
+            }}
+          </span>
         </div>
         <div class="info">
           <span class="meta">Age and difficulty</span>
@@ -45,17 +41,11 @@
             class="value"
             v-for="ageAndDifficulty in lesson.age_and_difficulty"
             :key="ageAndDifficulty"
-            >{{ ageAndDifficulty }}</span
-          >
+          >{{ ageAndDifficulty }}</span>
         </div>
         <div class="info">
           <span class="meta">Duration</span>
-          <span
-            class="value"
-            v-for="duration in lesson.duration"
-            :key="duration"
-            >{{ duration }}</span
-          >
+          <span class="value" v-for="duration in lesson.duration" :key="duration">{{ duration }}</span>
         </div>
         <div class="info">
           <span class="meta">Activity type</span>
@@ -63,35 +53,34 @@
             class="value"
             v-for="activityType in lesson.activity_type"
             :key="activityType"
-            >{{ activityType }}</span
-          >
+          >{{ activityType }}</span>
         </div>
         <div class="info similar-lessons">
           <span class="meta">Similar lessons</span>
           <div class="values">
-            <div
-              v-for="similarLesson in lesson.similar_lessons"
-              :key="similarLesson"
-              class="value"
-            >
-              <a :href="`/lesson/${similarLesson.id}`">{{
-                similarLesson.title
-              }}</a>
+            <div v-for="similarLesson in lesson.similar_lessons" :key="similarLesson" class="value">
+              <a :href="`/lesson/${similarLesson.id}`">
+                {{
+                  similarLesson.title
+                }}
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <DownloadPopup v-if="popupVisible" @success="popupVisible = false" :lesson="lesson" />
   </div>
 </template>
 
 <script>
-import LessonList from "./LessonList.vue";
+import LessonList from './LessonList.vue';
+import DownloadPopup from './Download.vue';
 
 export default {
   data() {
     return {
-      isAuth: false,
+      popupVisible: false,
       languagesDictionary: {},
       tags: null,
       lessons: [],
@@ -99,6 +88,7 @@ export default {
   },
   components: {
     LessonList,
+    DownloadPopup
   },
   props: ["id", "lesson"],
   methods: {

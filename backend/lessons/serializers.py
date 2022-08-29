@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.fields import MultipleChoiceField
 
-from lessons.models import Lesson
+from lessons.models import Lesson, Download
 
 
 class BaseLessonSerializer(serializers.ModelSerializer):
@@ -62,3 +62,9 @@ class LessonSerializer(BaseLessonSerializer):
         serializer = BaseLessonSerializer(all_similar_lessons, many=True)
 
         return serializer.data
+
+
+class DownloadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Download
+        fields = "__all__"

@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 from django.db.models import Q
 
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 
-from lessons.models import Lesson
-from lessons.serializers import LessonSerializer
+from lessons.models import Lesson, Download
+from lessons.serializers import LessonSerializer, DownloadSerializer
 from lessons.filters import LessonFilter
 
 
@@ -94,3 +94,9 @@ class LessonViewSet(ReadOnlyModelViewSet):
             activity_types_q,
         )
         return queryset
+
+
+class DownloadViewSet(ModelViewSet):
+    queryset = Download.objects.all()
+    serializer_class = DownloadSerializer
+    http_method_names = ["post"]

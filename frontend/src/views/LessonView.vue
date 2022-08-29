@@ -24,12 +24,11 @@ export default {
   },
   props: ["id"],
   async created() {
-    this.lesson = await this.$store.dispatch("getLesson", { id: this.id });
-    this.$store.state.lessons.lesson = this.lesson;
-    const choice = this.votes.find((vote) => vote.lesson === this.lesson.id);
-    if (choice) this.lesson.choice = choice.choices;
-  },
-};
+    this.lesson = await this.$store.dispatch('getLesson', { id: this.id })
+    this.$store.state.lessons.lesson = this.lesson
+  }
+}
+
 </script>
 
 <style scoped lang="scss">
