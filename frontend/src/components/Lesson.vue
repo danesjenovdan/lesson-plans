@@ -17,65 +17,55 @@
       <div class="infos">
         <div class="info">
           <span class="meta">Material type</span>
-          <span
-            class="value"
-            v-for="materialType in lesson.material_type"
-            :key="materialType"
-          >{{ materialType }}</span>
+          <span class="value">{{ lesson.material_type?.join(", ") }}</span>
         </div>
         <div class="info">
           <span class="meta">Language</span>
-          <span class="value" v-for="language in lesson.language" :key="language">{{ language }}</span>
+          <span class="value">{{ lesson.language?.join(", ") }}</span>
         </div>
         <div class="info">
           <span class="meta">Topic</span>
-          <span class="value" v-for="topic in lesson.topic" :key="topic">
-            {{
-              topic
-            }}
-          </span>
+          <span class="value">{{ lesson.topic?.join(", ") }}</span>
         </div>
         <div class="info">
           <span class="meta">Age and difficulty</span>
-          <span
-            class="value"
-            v-for="ageAndDifficulty in lesson.age_and_difficulty"
-            :key="ageAndDifficulty"
-          >{{ ageAndDifficulty }}</span>
+          <span class="value">{{ lesson.age_and_difficulty?.join(", ") }}</span>
         </div>
         <div class="info">
           <span class="meta">Duration</span>
-          <span class="value" v-for="duration in lesson.duration" :key="duration">{{ duration }}</span>
+          <span class="value">{{ lesson.duration?.join(", ") }}</span>
         </div>
         <div class="info">
           <span class="meta">Activity type</span>
-          <span
-            class="value"
-            v-for="activityType in lesson.activity_type"
-            :key="activityType"
-          >{{ activityType }}</span>
+          <span class="value">{{ lesson.activity_type?.join(", ") }}</span>
         </div>
         <div class="info similar-lessons">
           <span class="meta">Similar lessons</span>
           <div class="values">
-            <div v-for="similarLesson in lesson.similar_lessons" :key="similarLesson" class="value">
+            <div
+              v-for="similarLesson in lesson.similar_lessons"
+              :key="similarLesson"
+              class="value"
+            >
               <a :href="`/lesson/${similarLesson.id}`">
-                {{
-                  similarLesson.title
-                }}
+                {{ similarLesson.title }}
               </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <DownloadPopup v-if="popupVisible" @success="popupVisible = false" :lesson="lesson" />
+    <DownloadPopup
+      v-if="popupVisible"
+      @success="popupVisible = false"
+      :lesson="lesson"
+    />
   </div>
 </template>
 
 <script>
-import LessonList from './LessonList.vue';
-import DownloadPopup from './Download.vue';
+import LessonList from "./LessonList.vue";
+import DownloadPopup from "./Download.vue";
 
 export default {
   data() {
@@ -88,7 +78,7 @@ export default {
   },
   components: {
     LessonList,
-    DownloadPopup
+    DownloadPopup,
   },
   props: ["id", "lesson"],
   methods: {
@@ -229,29 +219,31 @@ export default {
             width: min-content;
           }
 
-          .value {
-            & + .value {
-              margin-top: 14px;
-            }
-
-            a {
-              &,
-              &:visited {
-                display: inline;
-                font-size: 16px;
-                text-decoration: none;
-                color: #252525;
-                border-bottom: 1px solid #000;
+          .values {
+            .value {
+              & + .value {
+                margin-top: 14px;
               }
 
-              &::before {
-                content: "";
-                display: inline-block;
-                background-image: url("../assets/open-new-page.svg");
-                background-repeat: no-repeat;
-                width: 14px;
-                height: 14px;
-                margin-right: 5px;
+              a {
+                &,
+                &:visited {
+                  display: inline;
+                  font-size: 16px;
+                  text-decoration: none;
+                  color: #252525;
+                  border-bottom: 1px solid #000;
+                }
+
+                &::before {
+                  content: "";
+                  display: inline-block;
+                  background-image: url("../assets/open-new-page.svg");
+                  background-repeat: no-repeat;
+                  width: 14px;
+                  height: 14px;
+                  margin-right: 5px;
+                }
               }
             }
           }
