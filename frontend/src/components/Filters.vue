@@ -1,26 +1,30 @@
 <template>
   <div>
-    <div class="search">
-      <h3>Search for lessons</h3>
+    <div class="header">
+      <img src="../assets/lesson-plans.svg" alt="Lesson plans logo" />
+      <h3>LESSON PLANS</h3>
     </div>
-    <div class="clear-all-btn-wrapper">
+    <!-- <div class="clear-all-btn-wrapper">
       <div class="clear-all-btn" @click="resetFilters">Clear all</div>
-    </div>
+    </div> -->
     <div class="filters-container">
+
+      <!-- LANGUAGE -->
       <div
         class="filter-box bottom-popup"
         :class="{ 'filters-selected': chosenLanguageFilters.length }"
-        @click="toggleSelected"
         v-outside="hideSelected"
       >
-        <div class="content">
-          <img src="../assets/topic.svg" />
-          <span v-if="chosenLanguageFilters.length === 0" data-type="languageFilter">
+        <div class="content" @click="toggleSelected">
+          <img src="../assets/language.svg" />
+          <span v-if="chosenLanguageFilters.length > 0"
+          >{{ chosenFiltersText(chosenLanguageFilters) }}</span>
+        </div>
+        <div class="content-no-filters" @click="toggleSelected" v-if="chosenLanguageFilters.length === 0">
+          <img src="../assets/language.svg" />
+          <span data-type="languageFilter">
             <i>{{ $t('filters.language') }}</i>
           </span>
-          <span
-            v-if="chosenLanguageFilters.length > 0"
-          >{{ chosenFiltersText(chosenLanguageFilters) }}</span>
         </div>
         <div class="popup-container" id="languageFilter" @click.stop>
           <div class="popup-box">
@@ -39,27 +43,29 @@
               </div>
             </div>
           </div>
-          <div class="popup-apply" :onclick="toggleFilters" data-type="languageFilter">Apply</div>
+          <div class="popup-apply" :onclick="toggleFilters" data-type="languageFilter">
+            <span>Apply</span>
+          </div>
           <div class="popup-arrow"></div>
         </div>
       </div>
+
+      <!-- AGE AND DIFFICULTY -->
       <div
         class="filter-box bottom-popup"
         :class="{ 'filters-selected': chosenAgeAndDifficultyFilters.length }"
-        @click="toggleSelected"
         v-outside="hideSelected"
       >
-        <div class="content">
-          <img src="../assets/ageAndDifficulty.svg" />
-          <span
-            v-if="chosenAgeAndDifficultyFilters.length === 0"
-            data-type="ageAndDifficultyFilter"
-          >
+        <div class="content" @click="toggleSelected">
+          <img src="../assets/difficulty.svg" />
+          <span v-if="chosenAgeAndDifficultyFilters.length > 0"
+          >{{ chosenFiltersText(chosenAgeAndDifficultyFilters) }}</span>
+        </div>
+        <div class="content-no-filters" @click="toggleSelected" v-if="chosenAgeAndDifficultyFilters.length === 0">
+          <img src="../assets/difficulty.svg" />
+          <span data-type="ageAndDifficultyFilter">
             <i>{{ $t('filters.ageAndDifficulty') }}</i>
           </span>
-          <span
-            v-if="chosenAgeAndDifficultyFilters.length > 0"
-          >{{ chosenFiltersText(chosenAgeAndDifficultyFilters) }}</span>
         </div>
         <div class="popup-container" id="ageAndDifficultyFilter" @click.stop>
           <div class="popup-box">
@@ -78,22 +84,28 @@
               </div>
             </div>
           </div>
-          <div class="popup-apply" :onclick="toggleFilters" data-type="ageAndDifficultyFilter">Apply</div>
+          <div class="popup-apply" :onclick="toggleFilters" data-type="ageAndDifficultyFilter">
+            <span>Apply</span>
+          </div>
           <div class="popup-arrow"></div>
         </div>
       </div>
+
+      <!-- TOPIC -->
       <div
         class="filter-box bottom-popup"
         :class="{ 'filters-selected': chosenTopicFilters.length }"
-        @click="toggleSelected"
         v-outside="hideSelected"
       >
-        <div class="content">
+        <div class="content" @click="toggleSelected">
           <img src="../assets/topic.svg" />
-          <span v-if="chosenTopicFilters.length === 0" data-type="topicFilter">
+          <span v-if="chosenTopicFilters.length > 0">{{ chosenFiltersText(chosenTopicFilters) }}</span>
+        </div>
+        <div class="content-no-filters" @click="toggleSelected" v-if="chosenTopicFilters.length === 0">
+          <img src="../assets/topic.svg" />
+          <span data-type="topicFilter">
             <i>{{ $t('filters.topic') }}</i>
           </span>
-          <span v-if="chosenTopicFilters.length > 0">{{ chosenFiltersText(chosenTopicFilters) }}</span>
         </div>
         <div class="popup-container" id="topicFilter" @click.stop>
           <div class="popup-box">
@@ -112,27 +124,29 @@
               </div>
             </div>
           </div>
-          <div class="popup-apply" :onclick="toggleFilters" data-type="topicFilter">Apply</div>
+          <div class="popup-apply" :onclick="toggleFilters" data-type="topicFilter">
+            <span>Apply</span>
+          </div>
           <div class="popup-arrow"></div>
         </div>
       </div>
+
+      <!-- ACTIVITY TYPE -->
       <div
-        class="filter-box bottom-popup"
+        class="filter-box top-popup"
         :class="{ 'filters-selected': chosenActivityTypeFilters.length }"
-        @click="toggleSelected"
         v-outside="hideSelected"
       >
-        <div class="content">
-          <img src="../assets/activityType.svg" />
-          <span
-            v-if="chosenActivityTypeFilters.length === 0"
-            data-activity-type="activityTypeFilter"
-          >
+        <div class="content" @click="toggleSelected">
+          <img src="../assets/activity_type.svg" />
+          <span v-if="chosenActivityTypeFilters.length > 0"
+          >{{ chosenFiltersText(chosenActivityTypeFilters) }}</span>
+        </div>
+        <div class="content-no-filters" @click="toggleSelected" v-if="chosenActivityTypeFilters.length === 0">
+          <img src="../assets/activity_type.svg" />
+          <span data-type="activityTypeFilter">
             <i>{{ $t('filters.activityType') }}</i>
           </span>
-          <span
-            v-if="chosenActivityTypeFilters.length > 0"
-          >{{ chosenFiltersText(chosenActivityTypeFilters) }}</span>
         </div>
         <div class="popup-container" id="activityTypeFilter" @click.stop>
           <div class="popup-box">
@@ -151,24 +165,29 @@
               </div>
             </div>
           </div>
-          <div class="popup-apply" :onclick="toggleFilters" data-type="activityTypeFilter">Apply</div>
+          <div class="popup-apply" :onclick="toggleFilters" data-type="activityTypeFilter">
+            <span>Apply</span>
+          </div>
           <div class="popup-arrow"></div>
         </div>
       </div>
+
+      <!-- DURATION -->
       <div
         class="filter-box top-popup"
         :class="{ 'filters-selected': chosenDurationFilters.length }"
-        @click="toggleSelected"
         v-outside="hideSelected"
       >
-        <div class="content">
+        <div class="content" @click="toggleSelected">
           <img src="../assets/duration.svg" />
-          <span v-if="chosenDurationFilters.length === 0" data-type="durationFilter">
+          <span v-if="chosenDurationFilters.length > 0"
+          >{{ chosenFiltersText(chosenDurationFilters) }}</span>
+        </div>
+        <div class="content-no-filters" @click="toggleSelected" v-if="chosenDurationFilters.length === 0">
+          <img src="../assets/duration.svg" />
+          <span data-type="durationFilter">
             <i>{{ $t('filters.duration') }}</i>
           </span>
-          <span
-            v-if="chosenDurationFilters.length > 0"
-          >{{ chosenFiltersText(chosenDurationFilters) }}</span>
         </div>
         <div class="popup-container" id="durationFilter" @click.stop>
           <div class="popup-box">
@@ -187,18 +206,26 @@
               </div>
             </div>
           </div>
-          <div class="popup-apply" :onclick="toggleFilters" data-type="durationFilter">Apply</div>
+          <div class="popup-apply" :onclick="toggleFilters" data-type="durationFilter">
+            <span>Apply</span>
+          </div>
           <div class="popup-arrow"></div>
         </div>
       </div>
+
+      <!-- MATERIAL TYPE -->
       <div
         class="filter-box top-popup"
         :class="{ 'filters-selected': chosenMaterialTypeFilters }"
-        @click="toggleSelected"
         v-outside="hideSelected"
       >
-        <div class="content">
-          <img src="../assets/keyword.svg" />
+        <div class="content" @click="toggleSelected">
+          <img src="../assets/type.svg" />
+          <span v-if="chosenMaterialTypeFilters.length > 0"
+          >{{ chosenFiltersText(chosenMaterialTypeFilters) }}</span>
+        </div>
+        <div class="content-no-filters" @click="toggleSelected" v-if="chosenMaterialTypeFilters.length === 0">
+          <img src="../assets/type.svg" />
           <span data-type="materialTypeFilter">
             <i>{{ $t('filters.materialType') }}</i>
           </span>
@@ -211,7 +238,7 @@
                   :id="'materialType-' + materialType"
                   :value="{ id: materialType, value: materialType }"
                   type="checkbox"
-                  v-model="durationFilter"
+                  v-model="materialTypeFilter"
                 />
                 <label
                   class="popup-text"
@@ -220,7 +247,9 @@
               </div>
             </div>
           </div>
-          <div class="popup-apply" :onclick="toggleFilters" data-type="durationFilter">Apply</div>
+          <div class="popup-apply" :onclick="toggleFilters" data-type="materialTypeFilter">
+            <span>Apply</span>
+          </div>
           <div class="popup-arrow"></div>
         </div>
       </div>
@@ -268,7 +297,7 @@ export default {
       return this.$store.getters.getFilters.durationFilter || [];
     },
     chosenMaterialTypeFilters() {
-      return this.$store.getters.getFilters.materialTypeFilter;
+      return this.$store.getters.getFilters.materialTypeFilter  || [];
     },
     isDisabled() {
       return this.$store.getters.lesson_length > 0
@@ -291,13 +320,13 @@ export default {
   },
   methods: {
     toggleSelected(e) {
-      e.target.classList.toggle('selected');
+      e.target.parentElement.classList.toggle('selected');
     },
     hideSelected(e) {
       if (!e.target.classList.contains('popup-container')) {
         Array.from(document.querySelectorAll('.selected')).forEach((el) => el.classList.remove('selected'));
       }
-      if (e.target.classList.contains('filter-box')) {
+      if (e.target.parentElement.classList.contains('filter-box')) {
         this.toggleSelected(e);
       }
     },
@@ -318,17 +347,21 @@ export default {
       this.$emit('toggle-filters');
     },
     toggleFilters(event) {
-      const popup = document.getElementById(event.target.getAttribute('data-type'));
-      this.$store.commit('removeFilter', { filterName: event.target.getAttribute('data-type') })
-      this.$store.commit('addFilter', { filterName: event.target.getAttribute('data-type'), filterValue: this[event.target.getAttribute('data-type')] });
+      const filter = event.target.parentElement.getAttribute('data-type');
+      const popup = document.getElementById(filter);
+      this.$store.commit('removeFilter', { filterName: filter })
+      this.$store.commit('addFilter', { filterName: filter, filterValue: this[filter] });
       this.$store.commit('incrementFilterCount');
       popup.parentElement.classList.toggle('selected');
     },
+    // TODO: uredi translatione (dobi <ime filtra> iz nekje in prevod za "+ n more")
     chosenFiltersText(array) {
       if (array.length === 1) {
-        return array[0].value;
+        // return this.$t(`filterOptions.<ime filtra>.${array[0].value}`);
+        return this.$t(`filterOptions.language.${array[0].value}`);
       } else {
-        return `${array[0].value} + ${array.length - 1} more`;
+        // return this.$t(`filterOptions.<ime filtra>.${array[0].value}`) + ` ${array.length - 1} more`;
+        return this.$t(`filterOptions.language.${array[0].value}`) + ` ${array.length - 1} more`;
       }
     },
     resetFilters() {
@@ -348,26 +381,44 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.search {
-  font-size: 20px;
-  margin: 0;
-  color: #252525;
-  font-family: "Poppins";
-  width: 90%;
-  h3 {
-    margin-bottom: 20px;
+.header {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+
+  img {
+    width: 60px;
   }
-  @media (min-width: 768px) {
-    font-size: 30px;
+
+  h3 {
+    margin-left: 20px;
+    margin-top: 7px;
+    margin-bottom: 0;
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: 4px;
+    font-family: 'Fredoka One', cursive;
+    color: #000000;
+  }
+
+  @media (min-width: 1200px) {
+    h3 {
+      font-size: 48px;
+      line-height: 50px;
+      letter-spacing: 6px;
+    }
+
+    img {
+      width: 74px;
+    }
   }
 
   @media (min-width: 1400px) {
-    width: 90%;
-    margin: 0 auto;
+    margin: 60px 0;
   }
 
-  @media (min-width: 1600px) {
-    width: 80%;
+  @media (min-width: 1800px) {
+    margin: 100px 0;
   }
 }
 
@@ -404,50 +455,51 @@ export default {
 }
 
 .filters-container {
-  margin: 15px auto 40px;
-  width: 100%;
+  margin: 15px auto 20px;
   display: grid;
   position: relative;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 3%;
-  row-gap: 3%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
   @media (min-width: 1400px) {
-    width: 90%;
-    column-gap: 5%;
-    row-gap: 5%;
-    margin: 15px auto 80px;
+    margin-bottom: 80px;
   }
 
   @media (min-width: 1600px) {
-    width: 80%;
+    width: 90%;
   }
 
   .filter-box {
-    background-color: white;
-    cursor: pointer;
-    border: 4px solid white;
     height: 120px;
+    width: 120px;
+    margin: 20px;
+    position: relative;
 
     @media (min-width: 576px) {
-      position: relative;
-      height: initial;
+      height: 140px;
+      width: 140px;
     }
 
-    &:after {
-      content: "";
-      display: block;
-      padding-bottom: 25%;
+    @media (min-width: 1400px) {
+      height: 160px;
+      width: 160px;
+    }
 
-      @media (min-width: 576px) {
-        padding-bottom: 90%;
-        position: relative;
-      }
+    @media (min-width: 1600px) {
+      height: 200px;
+      width: 200px;
+    }
+
+    @media (min-width: 1800px) {
+      height: 220px;
+      width: 220px;
     }
 
     &.selected {
-      border: 4px solid #3098f3;
-
       /* Toggle this class when clicking on the popup container (hide and show the popup) */
       .popup-container {
         opacity: 1;
@@ -460,54 +512,63 @@ export default {
       }
     }
 
-    .content {
+    .content,
+    .content-no-filters {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      pointer-events: none;
+      // pointer-events: none;
+
+      background-color: #aefcd8;
+      cursor: pointer;
+      border: 2px solid #000000;
 
       @media (min-width: 576px) {
         position: absolute;
       }
 
       img {
-        width: 50%;
+        width: 50px;
         pointer-events: none;
 
-        @media (min-width: 1400px) {
-          width: 40%;
+        @media (min-width: 1800px) {
+          width: 80px;
         }
       }
 
       span {
         color: #252525;
-        font-family: "IBM Plex Mono";
+        font-family: 'Inter', sans-serif;
         font-size: 14px;
         line-height: 20px;
         text-align: center;
         padding: 10px;
         pointer-events: none;
+        margin-top: 10px;
+        pointer-events: none;
+
 
         @media (min-width: 576px) {
           font-size: 18px;
+          line-height: 21px;
+        }
+
+        @media (min-width: 1800px) {
+          font-size: 21px;
+          line-height: 26px;
         }
       }
     }
 
-    &.filters-selected {
-      background-color: #d6eafd;
-      border-color: #d6eafd;
-
-      &.selected {
-        border-color: #3098f3;
-      }
-
-      img {
-        width: 25%;
-      }
+    .content-no-filters {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      background-color: #ffffff;
+      z-index: 1;
     }
 
     .popup-container {
@@ -516,9 +577,9 @@ export default {
       transition: opacity 0.2s, z-index 0.1s 0.2s;
       background-color: white;
       color: black;
-      border: 4px solid #3098f3;
+      border: 2px solid black;
       position: absolute;
-      box-shadow: 0 0 27px 3px rgba(48, 152, 243, 0.5);
+      box-shadow: 0 0 27px 3px rgba(0, 0, 0, 0.5);
       cursor: default;
 
       &#materialTypeFilter {
@@ -527,40 +588,9 @@ export default {
 
       .popup-box {
         padding: 20px;
+        padding-bottom: 5px;
         max-height: 300px;
         overflow-y: auto;
-
-        .keyword-container {
-          input {
-            height: auto !important;
-            border: 1px solid black;
-            margin: 10px 0;
-            width: 100%;
-
-            @media (min-width: 576px) {
-              width: 100%;
-            }
-          }
-        }
-
-        .keyword-apply {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          span {
-            text-decoration: underline;
-          }
-          .popup-apply {
-            margin-right: 0;
-            padding-bottom: 0;
-            border-top: 0;
-          }
-        }
-
-        .keyword-text {
-          font-family: "IBM Plex Mono";
-          font-size: 14px;
-        }
 
         .checkmark-container {
           display: grid;
@@ -578,20 +608,28 @@ export default {
 
         label.popup-text {
           cursor: default;
+          font-family: 'Inter', sans-serif;
+          font-style: normal;
+          padding-left: 28px;
         }
       }
 
       .popup-apply {
-        color: #3098f3 !important;
-        margin-right: 20px;
-        padding-bottom: 20px;
-        font-family: Poppins;
-        font-size: 18px;
-        font-weight: 700;
+        padding: 15px 20px;
         text-align: right;
-        text-decoration: underline;
         border-top: 1px solid black;
         cursor: pointer;
+
+        span {
+          background-color: #aefcd8;
+          text-transform: uppercase;
+          font-family: 'Inter', sans-serif;
+          border-radius: 15px;
+          padding: 2px 8px;
+          font-size: 16px;
+          font-weight: 500;
+          border: 1px solid black;
+        }
       }
       .popup-arrow {
         content: "";
@@ -600,8 +638,8 @@ export default {
         background: #fff;
         position: absolute;
         z-index: 1;
-        border-left: 4px solid #3098f3;
-        border-bottom: 4px solid #3098f3;
+        border-left: 2px solid black;
+        border-bottom: 2px solid black;
         left: 20px;
       }
     }
@@ -615,14 +653,14 @@ export default {
         @media (min-width: 576px) {
           left: -4px;
           right: initial;
-          top: calc(100% + 28px);
+          top: calc(100% + 3px);
           transform: none;
         }
       }
 
       .popup-arrow {
         transform: rotate(135deg);
-        top: -14px;
+        top: -12px;
         display: none;
         @media (min-width: 576px) {
           display: block;
@@ -646,7 +684,7 @@ export default {
       }
 
       .popup-arrow {
-        bottom: -14px;
+        bottom: -12px;
         transform: rotate(-45deg);
         display: none;
         @media (min-width: 576px) {
@@ -655,10 +693,7 @@ export default {
       }
     }
   }
-  .filter-box:hover {
-    background-color: #d6eafd;
-    border: #3098f3;
-  }
+  
 }
 
 .apply-button {
@@ -666,10 +701,15 @@ export default {
   justify-content: center;
 
   .btn {
-    margin-top: 20px;
+    background-color: #aefcd8;
+    text-transform: uppercase;
+    font-family: "Inter", sans-serif;
+    border-radius: 15px;
+    padding: 4px 10px;
     font-size: 14px;
-    letter-spacing: 1px;
-    padding: 5px 12px;
+    font-weight: 600;
+    border: 2px solid black;
+    color: black;
   }
 
   @media (min-width: 992px) {

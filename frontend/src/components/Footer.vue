@@ -27,6 +27,7 @@
 <style lang="scss" scoped>
 footer {
   padding-inline: 60px;
+  border-top: 2px solid black;
 
   @media (max-width: 991.98px) {
     padding-inline: 20px;

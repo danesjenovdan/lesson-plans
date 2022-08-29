@@ -1,28 +1,23 @@
 <template>
   <div v-if="lessons.length > 0 || hideAll" class="parent-container">
-    <div v-if="headers" class="header">
-      <div class="logo">
-        <img src="../assets/lesson-generator-logo.svg" alt="lesson generator logo" />
-      </div>
-    </div>
-    <div v-if="headers" class="line" />
     <div class="lessons-container">
       <div class="lessons-title-bar">
-        <div>
-          <h3>{{ title }}</h3>
-          <button v-if="headers" class="btn" @click="toggleFilters">Filters</button>
-          <ul class="tags">
-            <li class="tag" v-for="tag in tags" :key="tag">
-              <span class="tag-text">{{ tag }}</span>
-            </li>
-          </ul>
-        </div>
+        <h3>{{ title }}</h3>
+        <button v-if="headers" class="mobile-filters-btn" @click="toggleFilters">Filters</button>
+        <ul class="tags">
+          <li class="tag" v-for="tag in tags" :key="tag">
+            <span class="tag-text">{{ tag }}</span>
+          </li>
+        </ul>
       </div>
       <div class="lessons-list" v-for="lesson in lessons" :key="lesson.id">
         <div class="lesson-text-container">
           <router-link :to="'/lesson/' + lesson.id" class="lessons-title">{{ lesson.title }}</router-link>
-          <span v-for="topic in lesson.topic" :key="topic" class="lesson-topic">{{ topic }}</span>
+          <div>
+            <span v-for="topic in lesson.topic" :key="topic" class="lesson-topic">{{ $t(`filterOptions.topic.${topic}`) }}</span>
+          </div>
         </div>
+        <img src="../assets/back-arrow.svg" />
       </div>
       <div class="notFound" v-if="lessons.length === 0">
         <img src="../assets/filters-not-found.svg" />
@@ -158,9 +153,12 @@ export default {
     },
     tags: function () {
       let tags = []
+      console.log("store")
+        console.log(this.$store)
       Object.keys(this.$store.getters.getFilters).forEach(filter => {
-        console.log(filter);
         this.$store.getters.getFilters[filter].forEach((filterValue) => {
+          // TODO: uredi translations (dobit <ime filtra> iz nekje)
+          // tags.push(this.$t(`filterOptions.${<ime filtra>}.${filterValue.value}`))
           tags.push(filterValue.value)
         })
       })
@@ -231,151 +229,66 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (min-width: 992px) {
-    justify-content: flex-end;
-  }
-
-  @media (min-width: 1200px) {
-  }
-
-  .logo {
-    img {
-      margin-left: 20px;
-      height: 30px;
-
-      @media (min-width: 576px) {
-        height: 40px;
-      }
-
-      @media (min-width: 992px) {
-        display: none;
-      }
-    }
-  }
-
-  .btn {
-    @media (max-width: 575px) {
-      padding: 5px 5px;
-      font-size: 10px;
-    }
-  }
-  .button {
-    margin-left: 10px;
-    @media (max-width: 575px) {
-      padding: 5px 5px;
-      font-size: 10px;
-    }
-  }
-}
 
 .lessons-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  // height: 100vh;
   overflow-y: scroll;
   padding: 0 20px;
+  margin-top: 20px;
   margin-bottom: 20px;
 
   @media (min-width: 992px) {
     padding: 0 40px;
+    margin-top: 40px;
+  }
+
+  @media (min-width: 1800px) {
+    margin-top: 60px;
   }
 
   .lessons-title-bar {
-    display: flex;
-    flex-direction: column;
     border-bottom: 1px solid black;
+    position: relative;
 
     @media (min-width: 992px) {
       flex-direction: row;
       justify-content: space-between;
     }
 
-    div:nth-child(1) {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-
-      @media (min-width: 992px) {
-        padding: 20px 0;
-      }
-    }
-
     h3 {
       font-size: 20px;
       margin: 0;
       color: #252525;
-      font-family: "Poppins";
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      margin-bottom: 1rem;
 
       @media (min-width: 768px) {
         font-size: 30px;
-        line-height: 60px;
       }
     }
 
-    button {
+    .mobile-filters-btn {
+      background-color: #aefcd8;
+      text-transform: uppercase;
+      font-family: "Inter", sans-serif;
+      border-radius: 15px;
+      padding: 4px 10px;
       font-size: 14px;
-      letter-spacing: 1px;
-      padding: 5px 12px;
+      font-weight: 600;
+      border: 2px solid black;
+      position: absolute;
+      right: 0;
+      top: 0;
 
       @media (min-width: 992px) {
         display: none;
       }
     }
-
-    .lessons-sort {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-bottom: 10px;
-
-      @media (min-width: 992px) {
-        margin-bottom: 0;
-      }
-
-      .sort-button,
-      p {
-        font-family: "IBM Plex Mono";
-        font-size: 12px;
-        line-height: 14px;
-
-        @media (min-width: 992px) {
-          font-size: 14px;
-          line-height: 18px;
-        }
-      }
-
-      .sort-button {
-        border-radius: 20px;
-        background-color: rgb(48, 152, 243, 0.2);
-        padding: 5px 10px;
-        margin-left: 10px;
-        cursor: pointer;
-        color: #000000;
-        font-weight: 700;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-
-        svg {
-          margin-left: 0.5rem;
-          transition: transform 0.5s;
-          height: 14px;
-          &.toggled {
-            transform: rotate(-180deg);
-          }
-        }
-      }
-      .sort-button:hover {
-        background-color: #ffcc00;
-      }
-    }
   }
+
   .lessons-list {
     border-bottom: 1px solid black;
     padding: 0.5rem 0;
@@ -385,9 +298,11 @@ export default {
     justify-content: space-between;
     // width: 100%;
 
+    img {
+      width: 40px;
+    }
+
     .lesson-text-container {
-      display: flex;
-      flex-direction: column;
       color: #252525;
       margin: 1rem 0;
 
@@ -401,15 +316,26 @@ export default {
 
       .lessons-title {
         color: #252525;
-        font-family: Poppins;
-        font-size: 20px;
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 700;
         text-decoration: none;
         @media (min-width: 992px) {
-          font-size: 24px;
+          font-size: 18px;
         }
       }
       .lessons-title:hover {
-        color: #3098f3;
+        text-decoration: underline;
+      }
+
+      .lesson-topic {
+        display: inline-block;
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        padding: 5px 10px;
+        background-color: #c1ead7;
+        margin-right: 10px;
+        margin-top: 5px;
       }
     }
   }
@@ -425,7 +351,7 @@ export default {
 
     span {
       color: #252525;
-      font-family: Poppins;
+      font-family: 'Inter', sans-serif;
       font-size: 20px;
       font-weight: 400;
       font-style: normal;
@@ -478,13 +404,37 @@ export default {
   overflow-x: auto;
 }
 
-.lessonButtons {
-  display: flex;
-  justify-content: space-between;
+.tags {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 10px;
 }
 
-.line {
-  margin: 0;
-  border-top: 1px solid #3098f3;
+.tag {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 14px;
+  border: 2px solid black;
+  margin-right: 10px;
+
+  img {
+    height: 1em; 
+    vertical-align: middle;
+    margin-bottom: 2px;
+  }
+  img:hover {
+    cursor: pointer;
+  }
 }
+
+.tag-text {
+  color: #000000;
+  font-family: 'Fredoka One', cursive;
+  font-size: 14px;
+  letter-spacing: normal;
+  line-height: 18px;
+  text-align: center;
+}
+
 </style>
