@@ -4,6 +4,8 @@ import Toast, { TYPE } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import Home from './views/Home.vue'
 import LessonView from './views/LessonView.vue'
+import AboutView from './views/AboutView.vue'
+import HowToView from './views/HowToView.vue'
 import store from './store/store'
 import App from './App.vue'
 import IconComponent from './components/IconComponent.vue'
@@ -31,7 +33,7 @@ const options = {
           closeButtonClassName: "toast-button-class",
           toastClassName: "toast-custom-background",
           bodyClassName: ["toast-black-font-stlye"]
-      }    
+      }
   }
 };
 
@@ -49,6 +51,18 @@ const routes = [
       component: LessonView,
       props: true
     },
+    {
+      path: '/about',
+      name: 'AboutView',
+      component: AboutView,
+      props: true
+    },
+    {
+      path: '/howto',
+      name: 'HowToView',
+      component: HowToView,
+      props: true
+    },
   ];
 
 const router = createRouter({
@@ -57,4 +71,3 @@ const router = createRouter({
 })
 
 createApp(App).use(i18n).use(store).use(router).use(Toast, options).mount('#app')
-
