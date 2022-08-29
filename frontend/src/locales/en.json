@@ -1,0 +1,65 @@
+{
+    "pageTitle": "HELLO",
+    "footer": {
+        "about": "About",
+        "howto": "How to use"
+    },
+    "filters": {
+        "language": "Language",
+        "ageAndDifficulty": "Age, difficulty",
+        "topic": "Topic",
+        "activityType": "Type of activity",
+        "duration": "Duration",
+        "materialType": "Type of material"
+    },
+    "filterOptions": {
+        "topic": {
+            "argumentation": "Argumentation and reasoning",
+            "case": "Case building",
+            "evidence": "Empirical evidence and knowledge",
+            "games": "Exercises and debate club games",
+            "intro": "Introduction to debate and debate formats",
+            "analysis": "Non-argumentative analysis",
+            "public_speaking": "Public speaking",
+            "critical_thinking": "Critical thinking",
+            "motion_analysis": "Motion analysis",
+            "teacher_development": "Coach/teacher development",
+            "program_development": "Debate program development"
+        },
+        "materialType": {
+            "lesson": "Lesson plan",
+            "coaching": "Coaching guide",
+            "program": "Program guide",
+            "curriculum": "Curriculum"
+        },
+        "language": {
+            "EN": "English",
+            "HR": "Croatian",
+            "NL": "Dutch",
+            "SL": "Slovenian",
+            "SK": "Slovak",
+            "PL": "Polish"
+        },
+        "ageAndDifficulty": {
+            "advanced": "Advanced",
+            "intermediate": "Intermediate",
+            "beginner": "Beginner",
+
+            "under_14": "Under 14",
+            "between_14_and_19": "Between 14 and 19",
+            "over_19": "Over 19"
+        },
+        "duration": {
+            "45_min": "45 minutes",
+            "between_60_and_90 min": "60 - 90 minutes",
+            "over_90_min": "over 90 minutes"
+        },
+        "activityType": {
+            "2yr": "2-year debate program",
+            "1yr": "1-year debate program",
+            "6mo": "6-month debate program",
+            "short": "Short term debate program"
+        }
+
+    }
+}

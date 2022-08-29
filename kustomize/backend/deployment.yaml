@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lesson-plans-backend-deployment
+  labels:
+    app: lesson-plans-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lesson-plans-backend
+  template:
+    metadata:
+      labels:
+        app: lesson-plans-backend
+    spec:
+      volumes:
+        - name: lesson-plans-shared-storage
+          emptyDir: {}
+      initContainers:
+        - name: collectstatic
+          volumeMounts:
+            - name: lesson-plans-shared-storage
+              mountPath: /pvc
+          image: lesson-plans-backend
+          envFrom:
+            - secretRef:
+                name: lesson-plans-credentials
+          command:
+            - python
+            - manage.py
+            - collectstatic
+            - --no-input
+        - name: migrate
+          image: lesson-plans-backend
+          envFrom:
+            - secretRef:
+                name: lesson-plans-credentials
+          command:
+            - python
+            - manage.py
+            - migrate
+          volumeMounts:
+            - name: lesson-plans-shared-storage
+              mountPath: /pvc
+          # envFrom:
+          #   - secretRef:
+          #       name: lesson-plans-backend-credentials
+      containers:
+        - name: lesson-plans-backend
+          volumeMounts:
+            - name: lesson-plans-shared-storage
+              mountPath: /pvc
+          image: lesson-plans-backend
+          envFrom:
+            - secretRef:
+                name: lesson-plans-credentials
+          # command:
+          #   - gunicorn
+          #   - lesson-plans-backend_project.wsgi:application
+          #   - -b
+          #   - 0.0.0.0:8000
+          #   - --log-level
+          #   - DEBUG
+          command:
+            - python
+            - manage.py
+            - runserver
+            - 0.0.0.0:8000
+          ports:
+            - containerPort: 8000
+          # envFrom:
+          #     - secretRef:
+          #         name: lesson-plans-backend-credentials
+        - name: lesson-plans-backend-nginx
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          image: nginx:alpine
+          volumeMounts:
+            - name: lesson-plans-shared-storage
+              mountPath: /usr/share/nginx/html

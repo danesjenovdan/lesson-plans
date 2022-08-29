@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lesson-plans-frontend
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+    # nginx.ingress.kubernetes.io/configuration-snippet: |
+    #   try_files $uri $uri/ /index.html;
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - lesson-plans-frontend.lb.djnd.si
+      secretName: lesson-plans-frontend-tls
+  rules:
+    - host: lesson-plans-frontend.lb.djnd.si
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: lesson-plans-frontend
+                port:
+                  number: 80

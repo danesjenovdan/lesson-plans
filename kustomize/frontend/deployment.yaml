@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lesson-plans-frontend-deployment
+  labels:
+    app: lesson-plans-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lesson-plans-frontend
+  template:
+    metadata:
+      labels:
+        app: lesson-plans-frontend
+    spec:
+      containers:
+        - name: lesson-plans-frontend
+          image: lesson-plans-frontend
+          ports:
+            - containerPort: 80

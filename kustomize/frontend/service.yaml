@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lesson-plans-frontend
+spec:
+  selector:
+    app: lesson-plans-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
