@@ -16,9 +16,6 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:changeme@db/lesson_plans
       PYTHONPATH: /code:$PYTHONPATH
-      AWS_ACCESS_KEY_ID: SCW30TQKN6GH1444F68W
-      AWS_SECRET_ACCESS_KEY: a81e9263-250a-4dda-8995-50a3371a456a
-      ENABLE_S3: True
     depends_on:
       - db
 
