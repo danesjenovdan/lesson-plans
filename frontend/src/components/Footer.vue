@@ -8,17 +8,23 @@
     <div class="logos">
       <div class="left-side">
         <a href="https://zainproti.si/" target="_blank"
-          ><img src="../assets/ZiP_logo.png" alt="ZiP logo"
+          ><img src="../assets/logos/ZIP-logo-2-1.png" alt="ZiP logo"
         /></a>
         <a href="http://hdd.hr/" target="_blank"
-          ><img src="../assets/HDD_logo.png" alt="HDD logo"
+          ><img src="../assets/logos/cds.png" alt="HDD logo"
         /></a>
-        <a href="https://idebate.org/" target="_blank"
-          ><img src="../assets/IDEA_logo.png" alt="IDEA logo"
+        <a href="https://www.idi.hr/" target="_blank"
+          ><img src="../assets/logos/idiz-logo-full.svg" alt="IDIZ logo"
+        /></a>
+        <a href="https://www.sda.sk/" target="_blank"
+          ><img src="../assets/logos/SDA_logo.png" alt="SDA logo"
+        /></a>
+        <a href="http://www.polskadebatuje.org/" target="_blank"
+          ><img src="../assets/logos/polskadebatuje.png" alt="Polska debatuje logo"
         /></a>
       </div>
       <div class="right-side">
-        <img src="../assets/EU_logo.png" alt="EU logo" />
+        <img src="../assets/logos/cofoundederasmus.png" alt="EU logo" />
       </div>
     </div>
   </footer>
