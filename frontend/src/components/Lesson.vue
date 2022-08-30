@@ -1,62 +1,54 @@
 <template>
   <ArticleContainer>
-    <template #title>
-      {{ lesson.title }}
-    </template>
+    <template #title>{{ lesson.title }}</template>
     <template #subtitle>
       <ul class="tags">
         <li class="tag" v-for="topic in lesson.topic" :key="topic">
-          <span class="tag-text">{{ topic }}</span>
+          <span class="tag-text">{{ $t(`filterOptions.${topic}`) }}</span>
         </li>
       </ul>
     </template>
-    <template #default>
-      {{ lesson.description }}
-    </template>
+    <template #default>{{ lesson.description }}</template>
     <template #sidebar>
       <div class="sidebar-content">
         <button class="download" @click="modalVisible = true">
-          Download lesson
+          {{ $t('lesson.download') }}
           <img src="../assets/download.svg" />
         </button>
         <div class="infos">
           <div class="info">
-            <span class="meta">Material type</span>
-            <span class="value">{{ lesson.material_type?.join(", ") }}</span>
+            <span class="meta">{{ $t('filters.materialType') }}</span>
+            <span class="value">{{ joinFilterOptions(lesson.material_type) }}</span>
           </div>
           <div class="info">
-            <span class="meta">Language</span>
-            <span class="value">{{ lesson.language?.join(", ") }}</span>
+            <span class="meta">{{ $t('filters.language') }}</span>
+            <span class="value">{{ joinFilterOptions(lesson.language) }}</span>
           </div>
           <div class="info">
-            <span class="meta">Topic</span>
-            <span class="value">{{ lesson.topic?.join(", ") }}</span>
+            <span class="meta">{{ $t('filters.topic') }}</span>
+            <span class="value">{{ joinFilterOptions(lesson.topic) }}</span>
           </div>
           <div class="info">
-            <span class="meta">Age and difficulty</span>
-            <span class="value">{{
-              lesson.age_and_difficulty?.join(", ")
-            }}</span>
+            <span class="meta">{{ $t('filters.ageAndDifficulty') }}</span>
+            <span class="value">{{ joinFilterOptions(lesson.age_and_difficulty) }}</span>
           </div>
           <div class="info">
-            <span class="meta">Duration</span>
-            <span class="value">{{ lesson.duration?.join(", ") }}</span>
+            <span class="meta">{{ $t('filters.duration') }}</span>
+            <span class="value">{{ joinFilterOptions(lesson.duration) }}</span>
           </div>
           <div class="info">
-            <span class="meta">Activity type</span>
-            <span class="value">{{ lesson.activity_type?.join(", ") }}</span>
+            <span class="meta">{{ $t('filters.activityType') }}</span>
+            <span class="value">{{ joinFilterOptions(lesson.activity_type) }}</span>
           </div>
           <div class="info similar-lessons">
-            <span class="meta">Similar lessons</span>
+            <span class="meta">{{ $t('lesson.similarLessons') }}</span>
             <div class="values">
               <div
                 v-for="similarLesson in lesson.similar_lessons"
                 :key="similarLesson"
                 class="value"
               >
-                <a :href="`/lesson/${similarLesson.id}`">
-                  {{ similarLesson.title }}
-                </a>
+                <a :href="`/lesson/${similarLesson.id}`">{{ similarLesson.title }}</a>
               </div>
             </div>
           </div>
@@ -64,11 +56,7 @@
       </div>
     </template>
   </ArticleContainer>
-  <DownloadModal
-    v-if="modalVisible"
-    @success="modalVisible = false"
-    :lesson="lesson"
-  />
+  <DownloadModal v-if="modalVisible" @success="modalVisible = false" :lesson="lesson" />
 </template>
 
 <script>
@@ -86,6 +74,16 @@ export default {
       modalVisible: false,
     };
   },
+  methods: {
+    joinFilterOptions(filterOptions) {
+      if (filterOptions === undefined) {
+        return '';
+      }
+      return filterOptions.map(
+        (materialType) => this.$t(`filterOptions.${materialType}`)
+      ).join(", ");
+    }
+  }
 };
 </script>
 

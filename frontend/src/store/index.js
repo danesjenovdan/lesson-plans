@@ -1,4 +1,5 @@
-const api = 'http://localhost:8000/api/v1';
+// const api = "http://localhost:8000/api/v1";
+const api = 'https://lesson-plans-backend.lb.djnd.si/api/v1';
 
 export const state = () => ({
   lesson_length: 0,
@@ -72,10 +73,6 @@ Date.prototype.addHours = function(h) {
 }
 
 export const actions = {
-  // TODO delete me
-  async isAuth ({ getters }) {
-    return true
-  },
   async getLessonLength ({ getters }) {
     return getters.lesson_length
   },

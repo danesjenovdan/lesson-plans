@@ -10,7 +10,9 @@ import { resolve, dirname } from 'node:path'
 export default defineConfig({
   plugins: [
     vue(),
-    svgLoader(),
+    svgLoader({
+      defaultImport: 'url',
+    }),
     vueI18n({
       // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
       // compositionOnly: false,

@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="container-child">
       <div class="wrapper">
-        <router-link to="/" class="back-link">Back to the list</router-link>
+        <router-link to="/" class="back-link">{{ $t('lesson.back') }}</router-link>
         <slot />
       </div>
     </div>

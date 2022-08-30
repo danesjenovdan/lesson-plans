@@ -6,7 +6,7 @@
         <button v-if="headers" class="mobile-filters-btn" @click="toggleFilters">Filters</button>
         <ul class="tags">
           <li class="tag" v-for="tag in tags" :key="tag">
-            <span class="tag-text">{{ tag }}</span>
+            <span class="tag-text">{{ $t(`filterOptions.${tag}`) }}</span>
           </li>
         </ul>
       </div>
@@ -14,7 +14,11 @@
         <div class="lesson-text-container">
           <router-link :to="'/lesson/' + lesson.id" class="lessons-title">{{ lesson.title }}</router-link>
           <div>
-            <span v-for="topic in lesson.topic" :key="topic" class="lesson-topic">{{ $t(`filterOptions.topic.${topic}`) }}</span>
+            <span
+              v-for="topic in lesson.topic"
+              :key="topic"
+              class="lesson-topic"
+            >{{ $t(`filterOptions.${topic}`) }}</span>
           </div>
         </div>
         <img src="../assets/back-arrow.svg" />
@@ -140,7 +144,6 @@ export default {
       lessons: [],
       page: 1,
       refresh: true,
-      isAuth: false,
       lessonsNo: 0,
       dateSortAscend: false,
       qualitySortAscend: false,
@@ -155,11 +158,10 @@ export default {
       let tags = []
       Object.keys(this.$store.getters.getFilters).forEach(filter => {
         this.$store.getters.getFilters[filter].forEach((filterValue) => {
-          // TODO: uredi translations (dobit <ime filtra> iz nekje)
-          // tags.push(this.$t(`filterOptions.${<ime filtra>}.${filterValue.value}`))
           tags.push(filterValue.value)
         })
       })
+      console.log(tags);
       return tags;
     },
     filterCount: function () {
@@ -227,7 +229,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .lessons-container {
   display: flex;
   flex-direction: column;
@@ -259,7 +260,7 @@ export default {
       font-size: 20px;
       margin: 0;
       color: #252525;
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
       font-weight: 300;
       margin-bottom: 1rem;
 
@@ -314,7 +315,7 @@ export default {
 
       .lessons-title {
         color: #252525;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-size: 18px;
         font-weight: 700;
         text-decoration: none;
@@ -328,7 +329,7 @@ export default {
 
       .lesson-topic {
         display: inline-block;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-size: 11px;
         padding: 5px 10px;
         background-color: #c1ead7;
@@ -349,7 +350,7 @@ export default {
 
     span {
       color: #252525;
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
       font-size: 20px;
       font-weight: 400;
       font-style: normal;
@@ -417,7 +418,7 @@ export default {
   margin-right: 10px;
 
   img {
-    height: 1em; 
+    height: 1em;
     vertical-align: middle;
     margin-bottom: 2px;
   }
@@ -428,11 +429,10 @@ export default {
 
 .tag-text {
   color: #000000;
-  font-family: 'Fredoka One', cursive;
+  font-family: "Fredoka One", cursive;
   font-size: 14px;
   letter-spacing: normal;
   line-height: 18px;
   text-align: center;
 }
-
 </style>

@@ -11,7 +11,7 @@
         :language="language"
         :headers="true"
         :hideAll="true"
-        title="Lessons"
+        :title="$t('listTitle')"
         @toggle-filters="toggleFilters"
       />
     </div>

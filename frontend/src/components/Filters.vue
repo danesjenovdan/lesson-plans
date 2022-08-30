@@ -2,13 +2,12 @@
   <div>
     <div class="header">
       <img src="../assets/lesson-plans.svg" alt="Lesson plans logo" />
-      <h3>LESSON PLANS</h3>
+      <h3>{{ $t('pageTitle') }}</h3>
     </div>
     <!-- <div class="clear-all-btn-wrapper">
       <div class="clear-all-btn" @click="resetFilters">Clear all</div>
-    </div> -->
+    </div>-->
     <div class="filters-container">
-
       <!-- LANGUAGE -->
       <div
         class="filter-box bottom-popup"
@@ -17,14 +16,17 @@
       >
         <div class="content" @click="toggleSelected">
           <img src="../assets/language.svg" />
-          <span v-if="chosenLanguageFilters.length > 0"
+          <span
+            v-if="chosenLanguageFilters.length > 0"
           >{{ chosenFiltersText(chosenLanguageFilters) }}</span>
         </div>
-        <div class="content-no-filters" @click="toggleSelected" v-if="chosenLanguageFilters.length === 0">
+        <div
+          class="content-no-filters"
+          @click="toggleSelected"
+          v-if="chosenLanguageFilters.length === 0"
+        >
           <img src="../assets/language.svg" />
-          <span data-type="languageFilter">
-            {{ $t('filters.language') }}
-          </span>
+          <span data-type="languageFilter">{{ $t('filters.language') }}</span>
         </div>
         <div class="popup-container" id="languageFilter" @click.stop>
           <div class="popup-box">
@@ -39,7 +41,7 @@
                 <label
                   class="popup-text"
                   :for="'language-' + language"
-                >{{ $t(`filterOptions.language.${language}`) }}</label>
+                >{{ $t(`filterOptions.${language}`) }}</label>
               </div>
             </div>
           </div>
@@ -58,14 +60,17 @@
       >
         <div class="content" @click="toggleSelected">
           <img src="../assets/difficulty.svg" />
-          <span v-if="chosenAgeAndDifficultyFilters.length > 0"
+          <span
+            v-if="chosenAgeAndDifficultyFilters.length > 0"
           >{{ chosenFiltersText(chosenAgeAndDifficultyFilters) }}</span>
         </div>
-        <div class="content-no-filters" @click="toggleSelected" v-if="chosenAgeAndDifficultyFilters.length === 0">
+        <div
+          class="content-no-filters"
+          @click="toggleSelected"
+          v-if="chosenAgeAndDifficultyFilters.length === 0"
+        >
           <img src="../assets/difficulty.svg" />
-          <span data-type="ageAndDifficultyFilter">
-            {{ $t('filters.ageAndDifficulty') }}
-          </span>
+          <span data-type="ageAndDifficultyFilter">{{ $t('filters.ageAndDifficulty') }}</span>
         </div>
         <div class="popup-container" id="ageAndDifficultyFilter" @click.stop>
           <div class="popup-box">
@@ -80,7 +85,7 @@
                 <label
                   class="popup-text"
                   :for="'ageAndDifficulty-' + ageAndDifficulty"
-                >{{ $t(`filterOptions.ageAndDifficulty.${ageAndDifficulty}`) }}</label>
+                >{{ $t(`filterOptions.${ageAndDifficulty}`) }}</label>
               </div>
             </div>
           </div>
@@ -101,11 +106,13 @@
           <img src="../assets/topic.svg" />
           <span v-if="chosenTopicFilters.length > 0">{{ chosenFiltersText(chosenTopicFilters) }}</span>
         </div>
-        <div class="content-no-filters" @click="toggleSelected" v-if="chosenTopicFilters.length === 0">
+        <div
+          class="content-no-filters"
+          @click="toggleSelected"
+          v-if="chosenTopicFilters.length === 0"
+        >
           <img src="../assets/topic.svg" />
-          <span data-type="topicFilter">
-            {{ $t('filters.topic') }}
-          </span>
+          <span data-type="topicFilter">{{ $t('filters.topic') }}</span>
         </div>
         <div class="popup-container" id="topicFilter" @click.stop>
           <div class="popup-box">
@@ -117,10 +124,7 @@
                   type="checkbox"
                   v-model="topicFilter"
                 />
-                <label
-                  class="popup-text"
-                  :for="'topic-' + topic"
-                >{{ $t(`filterOptions.topic.${topic}`) }}</label>
+                <label class="popup-text" :for="'topic-' + topic">{{ $t(`filterOptions.${topic}`) }}</label>
               </div>
             </div>
           </div>
@@ -139,14 +143,17 @@
       >
         <div class="content" @click="toggleSelected">
           <img src="../assets/activity_type.svg" />
-          <span v-if="chosenActivityTypeFilters.length > 0"
+          <span
+            v-if="chosenActivityTypeFilters.length > 0"
           >{{ chosenFiltersText(chosenActivityTypeFilters) }}</span>
         </div>
-        <div class="content-no-filters" @click="toggleSelected" v-if="chosenActivityTypeFilters.length === 0">
+        <div
+          class="content-no-filters"
+          @click="toggleSelected"
+          v-if="chosenActivityTypeFilters.length === 0"
+        >
           <img src="../assets/activity_type.svg" />
-          <span data-type="activityTypeFilter">
-            {{ $t('filters.activityType') }}
-          </span>
+          <span data-type="activityTypeFilter">{{ $t('filters.activityType') }}</span>
         </div>
         <div class="popup-container" id="activityTypeFilter" @click.stop>
           <div class="popup-box">
@@ -161,7 +168,7 @@
                 <label
                   class="popup-text"
                   :for="'activityType-' + activityType"
-                >{{ $t(`filterOptions.activityType.${activityType}`) }}</label>
+                >{{ $t(`filterOptions.${activityType}`) }}</label>
               </div>
             </div>
           </div>
@@ -180,14 +187,17 @@
       >
         <div class="content" @click="toggleSelected">
           <img src="../assets/duration.svg" />
-          <span v-if="chosenDurationFilters.length > 0"
+          <span
+            v-if="chosenDurationFilters.length > 0"
           >{{ chosenFiltersText(chosenDurationFilters) }}</span>
         </div>
-        <div class="content-no-filters" @click="toggleSelected" v-if="chosenDurationFilters.length === 0">
+        <div
+          class="content-no-filters"
+          @click="toggleSelected"
+          v-if="chosenDurationFilters.length === 0"
+        >
           <img src="../assets/duration.svg" />
-          <span data-type="durationFilter">
-            {{ $t('filters.duration') }}
-          </span>
+          <span data-type="durationFilter">{{ $t('filters.duration') }}</span>
         </div>
         <div class="popup-container" id="durationFilter" @click.stop>
           <div class="popup-box">
@@ -202,7 +212,7 @@
                 <label
                   class="popup-text"
                   :for="'duration-' + duration"
-                >{{ $t(`filterOptions.duration.${duration}`) }}</label>
+                >{{ $t(`filterOptions.${duration}`) }}</label>
               </div>
             </div>
           </div>
@@ -221,14 +231,17 @@
       >
         <div class="content" @click="toggleSelected">
           <img src="../assets/type.svg" />
-          <span v-if="chosenMaterialTypeFilters.length > 0"
+          <span
+            v-if="chosenMaterialTypeFilters.length > 0"
           >{{ chosenFiltersText(chosenMaterialTypeFilters) }}</span>
         </div>
-        <div class="content-no-filters" @click="toggleSelected" v-if="chosenMaterialTypeFilters.length === 0">
+        <div
+          class="content-no-filters"
+          @click="toggleSelected"
+          v-if="chosenMaterialTypeFilters.length === 0"
+        >
           <img src="../assets/type.svg" />
-          <span data-type="materialTypeFilter">
-            {{ $t('filters.materialType') }}
-          </span>
+          <span data-type="materialTypeFilter">{{ $t('filters.materialType') }}</span>
         </div>
         <div class="popup-container" id="materialTypeFilter" @click.stop>
           <div class="popup-box">
@@ -243,7 +256,7 @@
                 <label
                   class="popup-text"
                   :for="'materialType-' + materialType"
-                >{{ $t(`filterOptions.materialType.${materialType}`) }}</label>
+                >{{ $t(`filterOptions.${materialType}`) }}</label>
               </div>
             </div>
           </div>
@@ -297,7 +310,7 @@ export default {
       return this.$store.getters.getFilters.durationFilter || [];
     },
     chosenMaterialTypeFilters() {
-      return this.$store.getters.getFilters.materialTypeFilter  || [];
+      return this.$store.getters.getFilters.materialTypeFilter || [];
     },
     isDisabled() {
       return this.$store.getters.lesson_length > 0
@@ -354,14 +367,11 @@ export default {
       this.$store.commit('incrementFilterCount');
       popup.parentElement.classList.toggle('selected');
     },
-    // TODO: uredi translatione (dobi <ime filtra> iz nekje in prevod za "+ n more")
     chosenFiltersText(array) {
       if (array.length === 1) {
-        // return this.$t(`filterOptions.<ime filtra>.${array[0].value}`);
-        return this.$t(`filterOptions.language.${array[0].value}`);
+        return this.$t(`filterOptions.${array[0].value}`);
       } else {
-        // return this.$t(`filterOptions.<ime filtra>.${array[0].value}`) + ` ${array.length - 1} more`;
-        return this.$t(`filterOptions.language.${array[0].value}`) + ` ${array.length - 1} more`;
+        return this.$t(`filterOptions.${array[0].value}`) + ` + ${array.length - 1}`;
       }
     },
     resetFilters() {
@@ -397,7 +407,7 @@ export default {
     font-size: 32px;
     line-height: 36px;
     letter-spacing: 4px;
-    font-family: 'Fredoka One', cursive;
+    font-family: "Fredoka One", cursive;
     color: #000000;
   }
 
@@ -459,7 +469,6 @@ export default {
   display: grid;
   position: relative;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -541,7 +550,7 @@ export default {
 
       span {
         color: #252525;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-size: 14px;
         line-height: 20px;
         text-align: center;
@@ -549,7 +558,6 @@ export default {
         pointer-events: none;
         margin-top: 10px;
         pointer-events: none;
-
 
         @media (min-width: 576px) {
           font-size: 18px;
@@ -608,7 +616,7 @@ export default {
 
         label.popup-text {
           cursor: default;
-          font-family: 'Inter', sans-serif;
+          font-family: "Inter", sans-serif;
           font-style: normal;
           padding-left: 28px;
         }
@@ -623,7 +631,7 @@ export default {
         span {
           background-color: #aefcd8;
           text-transform: uppercase;
-          font-family: 'Inter', sans-serif;
+          font-family: "Inter", sans-serif;
           border-radius: 15px;
           padding: 2px 8px;
           font-size: 16px;
@@ -693,7 +701,6 @@ export default {
       }
     }
   }
-  
 }
 
 .apply-button {

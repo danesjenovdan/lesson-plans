@@ -2,20 +2,14 @@
   <ModalContainer>
     <template #title>Download lesson</template>
     <template #default>
-      <div class="instructions">
-        {{ $t("download.instructions") }}
-      </div>
+      <div class="instructions">{{ $t("download.instructions") }}</div>
       <div class="form-elements">
-        <input
-          v-model="nameLastName"
-          type="text"
-          placeholder="Name and last name"
-        />
+        <input v-model="nameLastName" type="text" placeholder="Name and last name" />
         <input v-model="organization" type="text" placeholder="Organization" />
         <input v-model="email" type="email" placeholder="your@email.example" />
         <input v-model="country" type="text" placeholder="Country" />
         <select v-model="role" type="text">
-          <option disabled value="">Role</option>
+          <option disabled value>Role</option>
           <option value="teacher">teacher</option>
           <option value="coach">coach</option>
           <option value="parent">parent</option>
@@ -64,7 +58,8 @@ export default {
         country: this.country,
         role: this.role,
       };
-      const api = "http://localhost:8000/api/v1";
+      // const api = "http://localhost:8000/api/v1";
+      const api = 'https://lesson-plans-backend.lb.djnd.si/api/v1';
       const result = await fetch(`${api}/download/`, {
         method: "post",
         headers: {
