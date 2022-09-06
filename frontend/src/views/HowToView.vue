@@ -1,9 +1,9 @@
 <template>
   <PageContainer>
     <ArticleContainer>
-      <template #title>How to title</template>
+      <template #title>{{ $t("howTo.title") }}</template>
       <template #default>
-        <div>HOW TO TEXT</div>
+        <div class="md-content" v-html="$t('howTo.md-content')"></div>
       </template>
     </ArticleContainer>
   </PageContainer>
@@ -12,11 +12,15 @@
 <script>
 import PageContainer from "../components/PageContainer.vue";
 import ArticleContainer from "../components/ArticleContainer.vue";
+import messages from "../locales/how-to.yaml";
 
 export default {
   components: {
     PageContainer,
     ArticleContainer,
+  },
+  i18n: {
+    messages,
   },
 };
 </script>
