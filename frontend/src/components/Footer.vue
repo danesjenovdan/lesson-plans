@@ -1,8 +1,24 @@
 <template>
   <footer>
     <div class="links">
-      <a href="/about">{{ $t("footer.about") }}</a>
-      <a href="/howto">{{ $t("footer.howto") }}</a>
+      <div class="left-side">
+        <a href="/about">{{ $t("footer.about") }}</a>
+        <a href="/howto">{{ $t("footer.howto") }}</a>
+      </div>
+      <div class="right-side">
+        <div class="locale">
+          <label for="locale-select">{{ $t("filters.language") }}</label>
+          <select v-model="$i18n.locale" id="locale-select">
+            <option
+              v-for="locale in $i18n.availableLocales"
+              :key="`locale-${locale}`"
+              :value="locale"
+            >
+              {{ locale }}
+            </option>
+          </select>
+        </div>
+      </div>
     </div>
     <div class="divider"></div>
     <div class="logos">
@@ -20,7 +36,9 @@
           ><img src="../assets/logos/SDA_logo.png" alt="SDA logo"
         /></a>
         <a href="http://www.polskadebatuje.org/" target="_blank"
-          ><img src="../assets/logos/polskadebatuje.png" alt="Polska debatuje logo"
+          ><img
+            src="../assets/logos/polskadebatuje.png"
+            alt="Polska debatuje logo"
         /></a>
       </div>
       <div class="right-side">
@@ -39,31 +57,11 @@ footer {
     padding-inline: 20px;
   }
 
-  .links {
-    display: flex;
-    gap: 100px;
-    padding: 20px;
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #252525;
-
-    @media (max-width: 575.98px) {
-      justify-content: space-evenly;
-    }
-
-    a,
-    a:visited {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid #000;
-    }
-  }
-
   .divider {
     border-bottom: 2px solid #000;
   }
 
+  .links,
   .logos {
     display: flex;
     justify-content: space-between;
@@ -88,6 +86,56 @@ footer {
 
     img {
       height: 45px;
+    }
+  }
+
+  .links {
+    padding-block: 10px;
+
+    .left-side {
+      align-items: center;
+      gap: 100px;
+      padding-block: 15px;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #252525;
+
+      @media (max-width: 575.98px) {
+        justify-content: space-evenly;
+      }
+
+      a,
+      a:visited {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid #000;
+      }
+    }
+
+    .right-side {
+      align-items: center;
+
+      .locale {
+        label {
+          font-family: "Inter", sans-serif;
+          font-size: 16px;
+          font-weight: 600;
+          font-style: normal;
+          color: #252525;
+          margin-right: 10px;
+        }
+
+        select {
+          width: 70px;
+          height: 35px;
+          padding: 5px;
+          border-color: #252525;
+          border-width: 1px;
+          font-family: inherit;
+          font-size: 16px;
+        }
+      }
     }
   }
 }
