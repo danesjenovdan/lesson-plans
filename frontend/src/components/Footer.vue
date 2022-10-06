@@ -40,6 +40,11 @@
             src="../assets/logos/polskadebatuje.png"
             alt="Polska debatuje logo"
         /></a>
+        <a href="https://idebate.net/" target="_blank"
+          ><img
+            src="../assets/logos/IDEA_logo.png"
+            alt="IDEA logo"
+        /></a>
       </div>
       <div class="right-side">
         <img src="../assets/logos/cofoundederasmus.png" alt="EU logo" />
