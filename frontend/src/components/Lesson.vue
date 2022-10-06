@@ -4,7 +4,7 @@
     <template #subtitle>
       <ul class="tags">
         <li class="tag" v-for="topic in lesson.topic" :key="topic">
-          <span class="tag-text">{{ $t(`filterOptions.${topic}`) }}</span>
+          <router-link :to="{ name: 'Home', params: { filterByTopic: topic } }" class="tag-text">{{ $t(`filterOptions.${topic}`) }}</router-link>
         </li>
       </ul>
     </template>
@@ -83,7 +83,7 @@ export default {
         (materialType) => this.$t(`filterOptions.${materialType}`)
       ).join(", ");
     }
-  }
+  },
 };
 </script>
 
@@ -110,6 +110,7 @@ export default {
       color: #252525;
       font-family: "Inter", sans-serif;
       font-size: 18px;
+      text-decoration: none;
 
       @media (max-width: 991.98px) {
         font-size: 12px;

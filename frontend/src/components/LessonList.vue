@@ -138,7 +138,7 @@
 
 <script>
 export default {
-  props: ['id', 'type', 'title', 'headers', 'hideAll', 'propsLessons', 'language'],
+  props: ['id', 'type', 'title', 'headers', 'hideAll', 'propsLessons', 'language', 'filterByTopic'],
   data() {
     return {
       lessons: [],
@@ -161,7 +161,6 @@ export default {
           tags.push(filterValue.value)
         })
       })
-      console.log(tags);
       return tags;
     },
     filterCount: function () {
@@ -216,6 +215,9 @@ export default {
     this.$store.commit('clearFilters')
     if (this.language) {
       this.$store.commit('addFilter', { filterName: 'languageFilter', filterValue: [{ id: this.language[1], value: this.language[0] }] })
+    }
+    if (this.filterByTopic) {
+      this.$store.commit('addFilter', { filterName: 'topicFilter', filterValue: [{ id: this.filterByTopic, value: this.filterByTopic }] })
     }
     let response = []
     if (!this.propsLessons) response = await this.$store.dispatch(this.lessonType, { page: 1 })
@@ -416,6 +418,7 @@ export default {
   border-radius: 14px;
   border: 2px solid black;
   margin-right: 10px;
+  margin-bottom: 5px;
 
   img {
     height: 1em;

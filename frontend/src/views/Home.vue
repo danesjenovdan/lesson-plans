@@ -12,6 +12,7 @@
         :headers="true"
         :hideAll="true"
         :title="$t('listTitle')"
+        :filterByTopic="filterByTopic"
         @toggle-filters="toggleFilters"
       />
     </div>
@@ -24,7 +25,7 @@ import Filters from "../components/Filters.vue";
 import LessonList from "../components/LessonList.vue";
 
 export default {
-  props: ["language"],
+  props: ["language", "filterByTopic"],
   components: {
     Lesson,
     Filters,

@@ -285,6 +285,7 @@ export default {
       topicArray: [],
       activityTypeArray: [],
       durationArray: [],
+
       languageFilter: [],
       topicFilter: [],
       durationFilter: [],
@@ -386,6 +387,12 @@ export default {
     this.topicArray = TOPIC_CHOICES
     this.durationArray = DURATION_CHOICES
     this.activityTypeArray = ACTIVITY_TYPE_CHOICES
+  },
+  mounted() {
+    // if there are topic filter values when it redirects from lesson view to lesson list
+    this.topicFilter = this.chosenTopicFilters.map(f => { 
+      return {id: f.id, value: f.value} 
+    });
   }
 }
 </script>
