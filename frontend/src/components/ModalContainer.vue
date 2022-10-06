@@ -1,6 +1,6 @@
 <template>
   <div class="modal-bg">
-    <div class="modal">
+    <div class="modal" v-outside="hideSelected">
       <div class="container">
         <h4 v-if="!!$slots.title"><slot name="title" /></h4>
         <slot />
@@ -47,3 +47,33 @@
   }
 }
 </style>
+
+<script>
+
+export default {
+  directives: {
+    outside: {
+      beforeMount(el, binding, vnode) {
+        el.clickOutsideEvent = function (event) {
+          if (!(el === event.target || el.contains(event.target))) {
+            binding.value(event, el);
+          }
+        };
+        document.body.addEventListener('click', el.clickOutsideEvent);
+      },
+      unmounted(el) {
+        document.body.removeEventListener('click', el.clickOutsideEvent);
+      }
+    }
+  },
+  methods: {
+    hideSelected(e) {
+      console.log("yoyo")
+      console.log(e.target)
+      if (!(e.target.classList.contains("download") || (e.target.parentNode.classList.contains("download")))) {
+        this.$emit('clicked-outside');
+      }
+    },
+  }
+}
+</script>

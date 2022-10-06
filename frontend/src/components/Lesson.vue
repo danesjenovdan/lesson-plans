@@ -56,7 +56,7 @@
       </div>
     </template>
   </ArticleContainer>
-  <DownloadModal v-if="modalVisible" @success="modalVisible = false" :lesson="lesson" />
+  <DownloadModal v-if="modalVisible" @clicked-outside="modalVisible = false" :lesson="lesson" />
 </template>
 
 <script>

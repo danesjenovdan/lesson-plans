@@ -1,5 +1,5 @@
 <template>
-  <ModalContainer>
+  <ModalContainer @clicked-outside="$emit('clicked-outside')">
     <template #title>Download lesson</template>
     <template #default>
       <div class="instructions">{{ $t("download.instructions") }}</div>
@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     async downloadFile() {
-      console.log("vasdfasdf");
       const downloadData = {
         name_lastname: this.nameLastName,
         organization: this.organization,
