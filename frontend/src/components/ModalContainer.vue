@@ -68,8 +68,6 @@ export default {
   },
   methods: {
     hideSelected(e) {
-      console.log("yoyo")
-      console.log(e.target)
       if (!(e.target.classList.contains("download") || (e.target.parentNode.classList.contains("download")))) {
         this.$emit('clicked-outside');
       }
