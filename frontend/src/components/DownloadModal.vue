@@ -8,8 +8,8 @@
         <input v-model="organization" type="text" placeholder="Organization" />
         <input v-model="email" type="email" placeholder="your@email.example" />
         <input v-model="country" type="text" placeholder="Country" />
-        <select v-model="role" type="text">
-          <option disabled value>Role</option>
+        <select v-model="role">
+          <option disabled selected value>Role</option>
           <option value="teacher">teacher</option>
           <option value="coach">coach</option>
           <option value="parent">parent</option>
@@ -47,6 +47,40 @@ export default {
       country: "",
       role: "",
     };
+  },
+  mounted() {
+    if (localStorage.nameLastName) {
+      this.nameLastName = localStorage.nameLastName;
+    }
+    if (localStorage.organization) {
+      this.organization = localStorage.organization;
+    }
+    if (localStorage.email) {
+      this.email = localStorage.email;
+    }
+    if (localStorage.country) {
+      this.country = localStorage.country;
+    }
+    if (localStorage.role) {
+      this.role = localStorage.role;
+    }
+  },
+  watch: {
+    nameLastName(newNameLastName) {
+      localStorage.nameLastName = newNameLastName;
+    },
+    organization(newOrganization) {
+      localStorage.organization = newOrganization;
+    },
+    email(newEmail) {
+      localStorage.email = newEmail;
+    },
+    country(newCountry) {
+      localStorage.country = newCountry;
+    },
+    role(newRole) {
+      localStorage.role = newRole;
+    },
   },
   methods: {
     async downloadFile() {
