@@ -96,7 +96,7 @@ class Lesson(BaseModel):
     pdf = models.FileField()
 
     # filters/choice fields
-    material_type = MultiSelectField(max_length=10, choices=MATERIAL_TYPE_CHOICES)
+    material_type = MultiSelectField(choices=MATERIAL_TYPE_CHOICES)
     language = MultiSelectField(choices=LANGUAGE_CHOICES)
     topic = MultiSelectField(choices=TOPIC_CHOICES)
     # difficulty = MultiSelectField(choices=DIFFICULTY_CHOICES)
