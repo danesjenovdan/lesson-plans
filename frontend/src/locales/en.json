@@ -1,6 +1,6 @@
 {
-    "pageTitle": "LESSON PLANS",
-    "listTitle": "Lessons",
+    "pageTitle": "RESOURCEBASE",
+    "listTitle": "Resources",
     "footer": {
         "about": "About",
         "howto": "How to use"
@@ -26,7 +26,7 @@
         "teacher_development": "Coach/teacher development",
         "program_development": "Debate program development",
 
-        "lesson": "Lesson plan",
+        "lesson": "Resource",
         "coaching": "Coaching guide",
         "program": "Program guide",
         "curriculum": "Curriculum",
@@ -55,12 +55,12 @@
         "short": "Short term debate program"
     },
     "lesson": {
-        "download": "Download lesson",
-        "similarLessons": "Similar lessons",
+        "download": "Download resource",
+        "similarLessons": "Similar resources",
         "back": "Back to the list"
     },
     "download": {
-        "instructions": "In order to download a lesson please tell us a few things about yourself. By submitting you agree to allow IDEA to process your data only in this way and for this purpose. Your data will be deleted after X days.",
+        "instructions": "In order to download a resource please tell us a few things about yourself. By submitting you agree to allow IDEA to process your data only in this way and for this purpose. Your data will be deleted after X days.",
         "error": "Something has gone wrong. Please check that you filled out all the fields and that the email address you entered is valid."
     }
 }

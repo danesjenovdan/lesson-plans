@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <img src="../assets/lesson-plans.svg" alt="Lesson plans logo" />
+      <img src="../assets/lesson-plans.svg" alt="Logo" />
       <h3>{{ $t('pageTitle') }}</h3>
     </div>
     <!-- <div class="clear-all-btn-wrapper">
