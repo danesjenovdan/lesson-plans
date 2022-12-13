@@ -4,9 +4,9 @@
       <img src="../assets/lesson-plans.svg" alt="Logo" />
       <h3>{{ $t('pageTitle') }}</h3>
     </div>
-    <!-- <div class="clear-all-btn-wrapper">
+    <div class="clear-all-btn-wrapper">
       <div class="clear-all-btn" @click="resetFilters">Clear all</div>
-    </div>-->
+    </div>
     <div class="filters-container">
       <!-- LANGUAGE -->
       <div
@@ -376,6 +376,12 @@ export default {
       }
     },
     resetFilters() {
+      this.languageFilter = [];
+      this.topicFilter = [];
+      this.durationFilter = [];
+      this.ageAndDifficultyFilter = [];
+      this.activityTypeFilter = [];
+      this.materialTypeFilter = [];
       this.$store.commit('clearFilters');
       this.$store.commit('resetFilterCount');
     }
@@ -452,21 +458,19 @@ export default {
 
   .clear-all-btn {
     text-transform: uppercase;
-    font-style: italic;
-    color: black;
+    color: #252525;
     border-radius: 20px;
-    background-color: rgb(214, 234, 253);
+    background-color: #c1ead7;
     padding: 5px 10px;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    font-family: "IBM Plex Mono";
     font-size: 14px;
     line-height: 18px;
 
     &:hover {
-      background-color: #ffcc00;
+      background-color: #aefcd8;
     }
   }
 }

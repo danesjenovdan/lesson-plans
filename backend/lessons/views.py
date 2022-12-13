@@ -81,7 +81,7 @@ class LessonViewSet(ReadOnlyModelViewSet):
         if activity_types := self.request.query_params.get("activity_type"):
             activity_types = activity_types.split(",")
             for activity_type in activity_types:
-                activity_types_q.add(Q(language__icontains=activity_type), Q.OR)
+                activity_types_q.add(Q(activity_type__icontains=activity_type), Q.OR)
 
         queryset = Lesson.objects.filter(
             material_types_q,

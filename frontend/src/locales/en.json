@@ -26,7 +26,7 @@
         "teacher_development": "Coach/teacher development",
         "program_development": "Debate program development",
 
-        "lesson": "Resource",
+        "lesson": "Lesson plan",
         "coaching": "Coaching guide",
         "program": "Program guide",
         "curriculum": "Curriculum",
@@ -60,7 +60,7 @@
         "back": "Back to the list"
     },
     "download": {
-        "instructions": "In order to download a resource please tell us a few things about yourself. By submitting you agree to allow IDEA to process your data only in this way and for this purpose. Your data will be deleted after X days.",
+        "instructions": "To download a resource, please tell us a few things about yourself. By submitting, you agree to allow IDEA to process your data only to update you on changes to this resource and for reporting purposes. Your data will not be handed over to any third parties and will be deleted in 365 days.",
         "error": "Something has gone wrong. Please check that you filled out all the fields and that the email address you entered is valid."
     }
 }
