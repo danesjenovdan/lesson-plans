@@ -10,7 +10,7 @@
           </li>
         </ul>
       </div>
-      <div class="lessons-list" v-for="lesson in lessons" :key="lesson.id">
+      <div class="lessons-list" :class="{ 'list-loading': loading }" v-for="lesson in lessons" :key="lesson.id">
         <div class="lesson-text-container">
           <router-link :to="'/lesson/' + lesson.id" class="lessons-title">{{ lesson.title }}</router-link>
           <div>
@@ -23,12 +23,15 @@
         </div>
         <img src="../assets/back-arrow.svg" />
       </div>
-      <div class="notFound" v-if="lessons.length === 0">
+      <div class="notFound" v-if="lessons.length === 0 && !loading">
         <img src="../assets/filters-not-found.svg" />
         <span>
           No results found.
           <br />Please try different filters.
         </span>
+      </div>
+      <div class="loading" v-if="loading">
+        <img src="../assets/loading.svg" />
       </div>
     </div>
     <Pagination v-if="pagesNo > 1" :active="page" :pages-no="pagesNo" @go-to-page="goToPage" />
@@ -51,7 +54,8 @@ export default {
       lessonsNo: 0,
       dateSortAscend: false,
       qualitySortAscend: false,
-      lessonType: 'getLessons'
+      lessonType: 'getLessons',
+      loading: false
     }
   },
   computed: {
@@ -73,15 +77,20 @@ export default {
   },
   methods: {
     async goToPage (p) {
-      try {
-        const response = await this.$store.dispatch(this.lessonType, { page: p })
-        if (response) {
-          this.lessons = response.results
-          this.lessonsNo = response.count
-          this.page = p
+      if (p > 0 && p <= this.pagesNo) {
+        try {
+          this.loading = true;
+          const response = await this.$store.dispatch(this.lessonType, { page: p })
+          if (response) {
+            this.lessons = response.results
+            this.lessonsNo = response.count
+            this.page = p
+          }
+          this.loading = false;
+        } catch (error) {
+          console.log(error);
+          this.loading = false;
         }
-      } catch (error) {
-        console.log(error)
       }
     },
     toggleFilters() {
@@ -107,13 +116,17 @@ export default {
   watch: {
     filterCount: async function () {
       // await this.mapFiltersToTags()
+      this.loading = true;
       const response = await this.$store.dispatch(this.lessonType, { page: 1, filters: this.$store.getters.getFilters })
       this.lessons = response.results;
       this.lessonsNo = response.count;
+      this.page = 1;
       this.$store.state.lessons.lesson_length = this.lessonsNo;
+      this.loading = false;
     }
   },
   async created() {
+    this.loading = true;
     this.$store.commit('clearFilters')
     if (this.language) {
       this.$store.commit('addFilter', { filterName: 'languageFilter', filterValue: [{ id: this.language[1], value: this.language[0] }] })
@@ -125,7 +138,9 @@ export default {
     if (!this.propsLessons) response = await this.$store.dispatch(this.lessonType, { page: 1 })
     this.lessons = this.propsLessons ? this.propsLessons : response.results
     this.lessonsNo = response.count
+    this.page = 1;
     this.$store.state.lessons.lesson_length = this.lessonsNo;
+    this.loading = false;
     // await this.mapFiltersToTags()
   }
 }
@@ -133,10 +148,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@keyframes loading-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .lessons-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  // height: 100vh;
+  height: 100%;
   overflow-y: scroll;
   padding: 0 20px;
   margin-top: 20px;
@@ -199,7 +224,10 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    // width: 100%;
+
+    &.list-loading {
+      opacity: 50%;
+    }
 
     img {
       width: 40px;
@@ -263,6 +291,24 @@ export default {
       text-align: center;
     }
   }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    img {
+      width: 60px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: loading-animation 1.2s linear infinite;
+    }
+  }
 }
 
 .share-bar {
@@ -300,9 +346,10 @@ export default {
 .parent-container {
   display: flex;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: initial;
   overflow-x: auto;
 }
