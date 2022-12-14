@@ -31,113 +31,17 @@
         </span>
       </div>
     </div>
-    <div v-if="pagesNo > 1" class="pagination">
-      <div>
-        <button @click="changeSite(1)">
-          <svg
-            class="rotate-arrow"
-            height="15"
-            width="15"
-            fill="#000000"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 24 24"
-            version="1.1"
-            x="0px"
-            y="0px"
-          >
-            <title>icon/double-chevron-right-solid</title>
-            <desc>Created with Sketch Beta.</desc>
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <path
-                d="M11.8789,2.6816 L13.2929,1.2676 L23.9999,11.9746 L13.2929,22.6816 L11.8789,21.2676 L21.1719,11.9746 L11.8789,2.6816 Z M5.293,22.6816 L3.879,21.2676 L13.172,11.9746 L3.879,2.6816 L5.293,1.2676 L16,11.9746 L5.293,22.6816 Z"
-                fill="#000000"
-              />
-            </g>
-          </svg>
-        </button>
-        <button @click="changeSite(page - 1)">
-          <svg
-            height="15"
-            width="15"
-            fill="#000000"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 24 24"
-            version="1.1"
-            x="0px"
-            y="0px"
-          >
-            <title>icon/chevron-left-solid</title>
-            <desc>Created with Sketch Beta.</desc>
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <polygon
-                fill="#000000"
-                points="16.1211 21.2676 6.8281 11.9746 16.1211 2.6816 14.7071 1.2676 4.0001 11.9746 14.7071 22.6816"
-              />
-            </g>
-          </svg>
-        </button>
-        <ul>
-          <li
-            v-for="p in pagesNo"
-            :key="p"
-            :class="{ 'active-page': p === page }"
-            @click="changeSite(p)"
-          >{{ p }}</li>
-        </ul>
-        <button @click="changeSite(page + 1)">
-          <svg
-            class="rotate-arrow"
-            height="15"
-            width="15"
-            fill="#000000"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 24 24"
-            version="1.1"
-            x="0px"
-            y="0px"
-          >
-            <title>icon/chevron-left-solid</title>
-            <desc>Created with Sketch Beta.</desc>
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <polygon
-                fill="#000000"
-                points="16.1211 21.2676 6.8281 11.9746 16.1211 2.6816 14.7071 1.2676 4.0001 11.9746 14.7071 22.6816"
-              />
-            </g>
-          </svg>
-        </button>
-        <button @click="changeSite(pagesNo)">
-          <svg
-            height="15"
-            width="15"
-            fill="#ffffff"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 24 24"
-            version="1.1"
-            x="0px"
-            y="0px"
-          >
-            <title>icon/double-chevron-right-solid</title>
-            <desc>Created with Sketch Beta.</desc>
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <path
-                d="M11.8789,2.6816 L13.2929,1.2676 L23.9999,11.9746 L13.2929,22.6816 L11.8789,21.2676 L21.1719,11.9746 L11.8789,2.6816 Z M5.293,22.6816 L3.879,21.2676 L13.172,11.9746 L3.879,2.6816 L5.293,1.2676 L16,11.9746 L5.293,22.6816 Z"
-                fill="#000000"
-              />
-            </g>
-          </svg>
-        </button>
-      </div>
-    </div>
+    <Pagination v-if="pagesNo > 1" :active="page" :pages-no="pagesNo" @go-to-page="goToPage" />
   </div>
 </template>
 
 <script>
+import Pagination from "../components/Pagination.vue";
+
 export default {
+  components: {
+    Pagination,
+  },
   props: ['id', 'type', 'title', 'headers', 'hideAll', 'propsLessons', 'language', 'filterByTopic'],
   data() {
     return {
@@ -168,18 +72,16 @@ export default {
     }
   },
   methods: {
-    async changeSite(p) {
-      if (p > 0 && p <= this.pagesNo) {
-        try {
-          const response = await this.$store.dispatch(this.lessonType, { page: p })
-          if (response) {
-            this.lessons = response.results
-            this.lessonsNo = response.count
-            this.page = p
-          }
-        } catch (error) {
-          console.log(error)
+    async goToPage (p) {
+      try {
+        const response = await this.$store.dispatch(this.lessonType, { page: p })
+        if (response) {
+          this.lessons = response.results
+          this.lessonsNo = response.count
+          this.page = p
         }
+      } catch (error) {
+        console.log(error)
       }
     },
     toggleFilters() {
