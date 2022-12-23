@@ -58,7 +58,7 @@ class LessonSerializer(BaseLessonSerializer):
 
         # the | (pipe) operator works like a union, except it merges
         # the querysets after they were returned instead of in the query
-        all_similar_lessons = similar_to | similar_from
+        all_similar_lessons = set(similar_to | similar_from)
         serializer = BaseLessonSerializer(all_similar_lessons, many=True)
 
         return serializer.data
